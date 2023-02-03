@@ -28,7 +28,7 @@ const AnswerPost = ({questionId,question}) => {
             questionId: questionId
         }
 
-        fetch('http://localhost:5000/answer', {
+        fetch('https://quora-clone-backend.vercel.app/answer', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

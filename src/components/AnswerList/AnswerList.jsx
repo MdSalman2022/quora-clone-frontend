@@ -13,7 +13,7 @@ const AnswerList = ({questionId}) => {
     const [answers, setAnswers] = useState('')
 
     useEffect(() => {
-        fetch(`http://localhost:5000/answers/${questionId}`)
+        fetch(`https://quora-clone-backend.vercel.app/answers/${questionId}`)
             .then(res => res.json())
             .then(data => setAnswers(data))
     }, [upvote, downvote])
@@ -23,7 +23,7 @@ const AnswerList = ({questionId}) => {
    
     
     const handleUpvote = (id) => {
-        fetch(`http://localhost:5000/upvote/${id}`, {
+        fetch(`https://quora-clone-backend.vercel.app/upvote/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -40,7 +40,7 @@ const AnswerList = ({questionId}) => {
     }
 
     const handleDownvote = (id) => {
-        fetch(`http://localhost:5000/downvote/${id}`, {
+        fetch(`https://quora-clone-backend.vercel.app/downvote/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'

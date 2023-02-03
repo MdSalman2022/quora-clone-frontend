@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { useContext } from 'react';
 import { BiUpvote, BiDownvote } from 'react-icons/bi';
 import { FaRegComment } from 'react-icons/fa';
 import {TfiReload,TfiWrite} from 'react-icons/tfi';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 
 const PostCard = () => {
     const [upvote, setUpvote] = useState(false)
@@ -10,8 +12,10 @@ const PostCard = () => {
 
     const [questions, setQuestions] = useState('')
 
+    const {user} = useContext(AuthContext)
+
     useEffect(() => {
-        fetch('http://localhost:5000/questions')
+        fetch('https://quora-clone-backend.vercel.app/questions')
             .then(res => res.json())
             .then(data => setQuestions(data))
     }, [upvote,downvote])
@@ -20,7 +24,7 @@ const PostCard = () => {
 
     
     const handleUpvote = (id) => {
-        fetch(`http://localhost:5000/post-upvote/${id}`, {
+        fetch(`https://quora-clone-backend.vercel.app/post-upvote/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -37,7 +41,7 @@ const PostCard = () => {
     }
 
     const handleDownvote = (id) => {
-        fetch(`http://localhost:5000/post-downvote/${id}`, {
+        fetch(`https://quora-clone-backend.vercel.app/post-downvote/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -63,7 +67,7 @@ const PostCard = () => {
 
     const handleComment = (id) => {
         setComment(!comment)
-        fetch(`http://localhost:5000/answers/${id}`)
+        fetch(`https://quora-clone-backend.vercel.app/answers/${id}`)
             .then(res => res.json())
             .then(data => setAnswers(data))
     }   
@@ -76,7 +80,8 @@ const PostCard = () => {
                     <div className="card w-[800px] bg-white shadow-xl" key={question._id}>
                         <Link to={`question/${question._id}`}>
                             <div className="card-body">
-                                <h2 className="card-title">{question.question}</h2>
+                                    <h2 className="card-title">{question.question}</h2>
+                                    <p>Posted By {question.postedby ? question.postedby : "Anonymous"  } </p>
                             </div>
                         </Link>
                         <div className="card-actions justify-start p-5">

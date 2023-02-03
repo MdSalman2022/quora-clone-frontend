@@ -26,7 +26,7 @@ export const router = createBrowserRouter([
             }, 
             {
                 path: '/question/:id',
-                loader: ({ params }) => fetch(`http://localhost:5000/question/${params.id}`),
+                loader: ({ params }) => fetch(`https://quora-clone-backend.vercel.app/question/${params.id}`),
                 element: <PostPage></PostPage>
             },
         ]

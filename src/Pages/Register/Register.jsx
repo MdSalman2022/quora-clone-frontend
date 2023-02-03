@@ -20,7 +20,7 @@ const Register = () => {
 
 
 
-    // const from = location?.state?.from.pathname || '/'
+    const from = location?.state?.from.pathname || '/'
 
     const navigate = useNavigate();
 
@@ -38,8 +38,7 @@ const Register = () => {
                 }
                 updateUser(userInfo)
                     .then(() => {
-                        navigate('/')
-                        saveUser(data.name, data.email, data.role)
+                        navigate(from, { replace: true })
                     })
                     .catch(err => console.log(err))
 
@@ -49,29 +48,14 @@ const Register = () => {
                 setSignUpError(error.message)
             })
     }
-
-    const saveUser = (name, email, role) => {
-        const user = { name, email, role }
-        fetch('https://buyandsell24-server.vercel.app/users', {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(user)
-        })
-            .then(res => res.json())
-            .then(data => {
-                console.log('save user', data)
-                setCreatedUserEmail(email)
-            })
-    }
+ 
     const googleSignIn = event => {
         event.preventDefault();
         const Provider = new GoogleAuthProvider();
         providerLogin(Provider)
             .then(result => {
-                const user = result.user;
-                saveUser(user.displayName, user.email, user.role = "buyer")
+                const user = result.user; 
+                navigate(from, { replace: true })
             })
             .catch(error => console.error(error))
     }
@@ -83,7 +67,7 @@ const Register = () => {
         <div className=' my-20'>
             <div className="w-96 p-8 space-y-3 rounded-xl bg-base-200 mx-auto">
                 <h1 className="text-3xl font-bold text-center">Register</h1>
-                <form onSubmit={handleSubmit(handleSignUp)} novalidate="" action="" className="space-y-6 ng-untouched ng-pristine ng-valid">
+                <form onSubmit={handleSubmit(handleSignUp)} noValidate="" action="" className="space-y-6 ng-untouched ng-pristine ng-valid">
                     <div className="space-y-1 text-sm">
                         <label for="username" className="block ">Username</label>
                         <input type="text"
@@ -131,7 +115,7 @@ const Register = () => {
 
                 </div>
                 <p className="text-xs text-center sm:px-6 ">Already have an account?
-                    <Link to='/login' rel="noopener noreferrer" href="#" className="underline">Sign in</Link>
+                    <Link to='/login' rel="noopener noreferrer" href="#" className="underline font-bold">Sign in</Link>
                 </p>
             </div>
         </div>

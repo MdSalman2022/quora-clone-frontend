@@ -1,16 +1,18 @@
 import React from 'react';
-import toast, { Toaster } from 'react-hot-toast';
+import { useContext } from 'react';
+import toast, { Toaster } from 'react-hot-toast'; 
+import { AuthContext } from '../../contexts/AuthProvider/AuthProvider';
 
 
 const WritePost = () => {
 
+    const {user} = useContext(AuthContext)
 
     const handleBooking = event => {
         event.preventDefault()
         const form = event.target
-        const question = form.question.value 
+        const question = form.question.value  
         // const email = user.email
-        // const name = user.displayName
         // const photo = user.photoURL
         let upvote = 0
         let downvote = 0
@@ -24,10 +26,11 @@ const WritePost = () => {
             upvote,
             downvote,
             share,
-            comments
+            comments,
+            postedby: user.displayName
         }
 
-        fetch('http://localhost:5000/question', {
+        fetch('https://quora-clone-backend.vercel.app/question', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -48,7 +51,11 @@ const WritePost = () => {
             <div className="flex gap-3 items-center">
                         <div className="avatar">
                             <div className="w-10 h-10 rounded-full">
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Sundar_pichai.png/220px-Sundar_pichai.png" />
+                        {user ?
+                            <img src={user.photoURL} />
+                            :
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Sundar_pichai.png/220px-Sundar_pichai.png" />
+                        }
                             </div>
                         </div>
            

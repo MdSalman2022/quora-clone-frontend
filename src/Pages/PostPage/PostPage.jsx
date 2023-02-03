@@ -29,7 +29,7 @@ const PostPage = () => {
 
 
     useEffect(() => {
-        fetch(`http://localhost:5000/question/${_id}`)
+        fetch(`https://quora-clone-backend.vercel.app/question/${_id}`)
             .then(res => res.json())
             .then(data => setQues(data))
     }, [upvote, downvote, _id])
@@ -37,7 +37,7 @@ const PostPage = () => {
     console.log(ques)
     
     useEffect(() => {
-        fetch(`http://localhost:5000/answers/${_id}`)
+        fetch(`https://quora-clone-backend.vercel.app/answers/${_id}`)
             .then(res => res.json())
             .then(data => setAnswers(data))
     }, [_id])
@@ -47,7 +47,7 @@ const PostPage = () => {
 
     
     const handleUpvote = (_id) => {
-        fetch(`http://localhost:5000/post-upvote/${_id}`, {
+        fetch(`https://quora-clone-backend.vercel.app/post-upvote/${_id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -64,7 +64,7 @@ const PostPage = () => {
     }
 
     const handleDownvote = (_id) => {
-        fetch(`http://localhost:5000/post-downvote/${_id}`, {
+        fetch(`https://quora-clone-backend.vercel.app/post-downvote/${_id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'

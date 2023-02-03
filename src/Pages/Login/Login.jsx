@@ -44,6 +44,7 @@ const Login = () => {
         providerLogin(Provider)
             .then(result => {
                 const user = result.user;
+                navigate(from, { replace: true })
             })
             .catch(error => console.error(error))
     }
@@ -52,7 +53,7 @@ const Login = () => {
         <div className=' my-20'>
             <div className="w-96 p-8 space-y-3 rounded-xl bg-base-200 mx-auto">
                 <h1 className="text-3xl font-bold text-center">Login</h1>
-                <form onSubmit={handleSubmit(handleLogin)} novalidate="" action="" className="space-y-6 ng-untouched ng-pristine ng-valid">
+                <form onSubmit={handleSubmit(handleLogin)} noValidate="" action="" className="space-y-6 ng-untouched ng-pristine ng-valid">
                     <div className="space-y-1 text-sm">
                         <label className="label"><span className="label-text">Email</span></label>
                         <input type="text"
@@ -93,7 +94,7 @@ const Login = () => {
 
                 </div>
                 <p className="text-xs text-center sm:px-6 ">Don't have an account?
-                    <Link to='/register' rel="noopener noreferrer" href="#" className="underline">Sign up</Link>
+                    <Link to='/register' rel="noopener noreferrer" href="#" className="underline font-bold">Sign up</Link>
                 </p>
             </div>
         </div>
