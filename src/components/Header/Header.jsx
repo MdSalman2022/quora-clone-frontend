@@ -13,7 +13,7 @@ const Header = () => {
                     <li><Link to="/">Home</Link></li>
                 </ul>
                 </div>
-                <Link to='/' className="btn btn-ghost normal-case text-xl">daisyUI</Link>
+                <Link to='/' className="btn btn-ghost normal-case text-xl">QuoraClone</Link>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
@@ -21,7 +21,7 @@ const Header = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <a className="btn btn-primary">Login</a>
+                <Link to="/login" className="btn btn-primary">Login</Link>
             </div>
         </div>
     );
